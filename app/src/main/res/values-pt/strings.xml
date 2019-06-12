@@ -5,4 +5,11 @@
     <string name="credit">Crédito</string>
     <string name="debit">Débito</string>
     <string name="budget">Balanço</string>
+    <string name="chart">Grafico</string>
+    <string name="category_description">Descrição da categoria</string>
+    <string name="add_credit_transaction">Adicionar Transação de Crédito</string>
+    <string name="add_debit_transaction">Adicionar Transação de Débito</string>
+    <string name="add_category">Adicionar Categoria</string>
+    <string name="navigation_drawer_open">Abre Gaveta de Navegação</string>
+    <string name="navigation_drawer_close">Fecha Gaveta de Navegação</string>
 </resources>

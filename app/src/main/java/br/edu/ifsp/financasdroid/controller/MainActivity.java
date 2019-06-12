@@ -1,11 +1,6 @@
-package br.edu.ifsp.financasdroid;
+package br.edu.ifsp.financasdroid.controller;
 
 import android.os.Bundle;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-
-import android.view.View;
 
 import com.google.android.material.navigation.NavigationView;
 
@@ -16,6 +11,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import br.edu.ifsp.financasdroid.R;
+import br.edu.ifsp.financasdroid.controller.fragment.BudgetFragment;
+import br.edu.ifsp.financasdroid.controller.fragment.CategoriesFragment;
+import br.edu.ifsp.financasdroid.controller.fragment.ChartFragment;
+import br.edu.ifsp.financasdroid.controller.fragment.CreditFragment;
+import br.edu.ifsp.financasdroid.controller.fragment.DebitFragment;
 
 import android.view.MenuItem;
 
