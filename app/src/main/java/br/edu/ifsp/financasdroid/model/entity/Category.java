@@ -15,7 +15,7 @@ public class Category {
     @ColumnInfo
     private String description;
 
-    @ColumnInfo
+    @ColumnInfo(name = "transaction_type")
     private TransactionType transactionType;
 
     public Category(String description, TransactionType transactionType) {
