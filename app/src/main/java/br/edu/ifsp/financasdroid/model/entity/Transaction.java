@@ -1,13 +1,32 @@
-package br.edu.ifsp.financasdroid.model;
+package br.edu.ifsp.financasdroid.model.entity;
 
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.ForeignKey;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
+
+@Entity(tableName = "_transaction")
 public class Transaction {
 
+    @PrimaryKey(autoGenerate = true)
     private Long id;
+
+    @ColumnInfo
     private String description;
+
+    @ColumnInfo
     private String date;
-    private String value;
-    private String Type;
+
+    @ColumnInfo
+    private Double value;
+
+    @ColumnInfo
+    @ForeignKey(entity = Category.class, parentColumns = "id", childColumns = "category_id")
     private Long categoryId;
+
+    @Ignore
+    private Category category;
 
     public Long getId() {
         return id;
@@ -33,20 +52,12 @@ public class Transaction {
         this.date = date;
     }
 
-    public String getValue() {
+    public Double getValue() {
         return value;
     }
 
-    public void setValue(String value) {
+    public void setValue(Double value) {
         this.value = value;
-    }
-
-    public String getType() {
-        return Type;
-    }
-
-    public void setType(String type) {
-        Type = type;
     }
 
     public Long getCategoryId() {
@@ -55,5 +66,13 @@ public class Transaction {
 
     public void setCategoryId(Long categoryId) {
         this.categoryId = categoryId;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 }
