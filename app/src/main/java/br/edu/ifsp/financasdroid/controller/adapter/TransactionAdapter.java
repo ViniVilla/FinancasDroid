@@ -1,12 +1,13 @@
 package br.edu.ifsp.financasdroid.controller.adapter;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.text.NumberFormat;
 import java.util.List;
+import java.util.Locale;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -39,9 +40,10 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
         TextView value = holder.itemView.findViewById(R.id.value);
         TextView date = holder.itemView.findViewById(R.id.date);
         TextView description = holder.itemView.findViewById(R.id.description);
+        NumberFormat format = NumberFormat.getCurrencyInstance(new Locale("PT","BR"));
 
         category.setText(transactions.get(position).getCategory().getDescription());
-        value.setText("R$" + transactions.get(position).getValue());
+        value.setText(format.format(transactions.get(position).getValue()));
         date.setText(transactions.get(position).getDate());
         description.setText(transactions.get(position).getDescription());
     }

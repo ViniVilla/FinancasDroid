@@ -11,7 +11,8 @@
         <item
             android:id="@+id/nav_credit"
             android:icon="@drawable/ic_action_credit"
-            android:title="@string/credit" />
+            android:title="@string/credit"
+            android:checked="true"/>
         <item
             android:id="@+id/nav_debit"
             android:icon="@drawable/ic_action_debit"

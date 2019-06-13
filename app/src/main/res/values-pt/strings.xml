@@ -12,4 +12,10 @@
     <string name="add_category">Adicionar Categoria</string>
     <string name="navigation_drawer_open">Abre Gaveta de Navegação</string>
     <string name="navigation_drawer_close">Fecha Gaveta de Navegação</string>
+    <string name="remove">Remover</string>
+    <string name="add">Adicionar</string>
+    <string name="type">"Tipo: "</string>
+    <string name="description">Descrição</string>
+    <string name="date">Data</string>
+    <string name="value">Valor</string>
 </resources>
