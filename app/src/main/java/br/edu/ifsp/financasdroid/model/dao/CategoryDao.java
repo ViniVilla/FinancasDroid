@@ -26,10 +26,9 @@ public interface CategoryDao {
     @Query("SELECT * FROM  _category")
     List<Category> findAll();
 
-    @Query("SELECT * FROM _category WHERE transactionType = :transactionType")
+    @Query("SELECT * FROM _category WHERE transaction_type = :transactionType")
     List<Category> findByCategory(final TransactionType transactionType);
 
     @Query("SELECT * FROM _category WHERE id = :id LIMIT 1")
     Category findById(final Long id);
-
 }

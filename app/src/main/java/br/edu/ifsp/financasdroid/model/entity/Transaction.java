@@ -21,7 +21,7 @@ public class Transaction {
     @ColumnInfo
     private Double value;
 
-    @ColumnInfo
+    @ColumnInfo(name = "category_id")
     @ForeignKey(entity = Category.class, parentColumns = "id", childColumns = "category_id")
     private Long categoryId;
 

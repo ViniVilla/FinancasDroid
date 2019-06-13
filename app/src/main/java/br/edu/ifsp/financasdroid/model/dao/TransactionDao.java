@@ -10,7 +10,6 @@ import java.util.List;
 
 import br.edu.ifsp.financasdroid.model.TransactionType;
 
-
 @Dao
 public interface TransactionDao {
 
@@ -26,8 +25,8 @@ public interface TransactionDao {
     @Query("SELECT * FROM _transaction")
     List<TransactionDao> findAll();
 
-    @Query("SELECT * FROM _category INNER JOIN _transaction ON")
-    List<TransactionDao> findByType(final TransactionType);
+    @Query("SELECT * FROM _transaction WHERE category_id = (SELECT id FROM _category WHERE transaction_type = :transactionType)")
+    List<TransactionDao> findByType(final TransactionType transactionType);
 
     @Query("SELECT * FROM _transaction WHERE id = :id LIMIT 1")
     TransactionDao findById(final Long id);
