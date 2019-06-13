@@ -9,25 +9,26 @@ import androidx.room.Update;
 import java.util.List;
 
 import br.edu.ifsp.financasdroid.model.TransactionType;
+import br.edu.ifsp.financasdroid.model.entity.Transaction;
 
 @Dao
 public interface TransactionDao {
 
     @Insert
-    void save(final TransactionDao transaction);
+    void save(final Transaction transaction);
 
     @Delete
-    void delete(final TransactionDao transaction);
+    void delete(final Transaction transaction);
 
     @Update
-    void update(final TransactionDao transaction);
+    void update(final Transaction transaction);
 
     @Query("SELECT * FROM _transaction")
-    List<TransactionDao> findAll();
+    List<Transaction> findAll();
 
     @Query("SELECT * FROM _transaction WHERE category_id = (SELECT id FROM _category WHERE transaction_type = :transactionType)")
-    List<TransactionDao> findByType(final TransactionType transactionType);
+    List<Transaction> findByType(final TransactionType transactionType);
 
     @Query("SELECT * FROM _transaction WHERE id = :id LIMIT 1")
-    TransactionDao findById(final Long id);
+    Transaction findById(final Long id);
 }
