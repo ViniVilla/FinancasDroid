@@ -28,6 +28,13 @@ public class Transaction {
     @Ignore
     private Category category;
 
+    public Transaction(String description, String date, Double value, Category category) {
+        this.description = description;
+        this.date = date;
+        this.value = value;
+        this.category = category;
+    }
+
     public Long getId() {
         return id;
     }

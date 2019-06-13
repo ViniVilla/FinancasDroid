@@ -18,6 +18,11 @@ public class Category {
     @ColumnInfo
     private TransactionType transactionType;
 
+    public Category(String description, TransactionType transactionType) {
+        this.description = description;
+        this.transactionType = transactionType;
+    }
+
     public Long getId() {
         return id;
     }

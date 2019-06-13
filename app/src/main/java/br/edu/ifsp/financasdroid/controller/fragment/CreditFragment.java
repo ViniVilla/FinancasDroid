@@ -8,13 +8,25 @@ import android.view.ViewGroup;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.List;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import br.edu.ifsp.financasdroid.controller.adapter.TransactionAdapter;
 import br.edu.ifsp.financasdroid.controller.add.AddTransaction;
 import br.edu.ifsp.financasdroid.R;
+import br.edu.ifsp.financasdroid.model.TransactionType;
+import br.edu.ifsp.financasdroid.model.entity.Category;
+import br.edu.ifsp.financasdroid.model.entity.Transaction;
 
 public class CreditFragment extends Fragment {
+
+    private RecyclerView recyclerView;
+    private TransactionAdapter adapter;
+    private List<Transaction> transactions;
 
     @Nullable
     @Override
@@ -22,6 +34,14 @@ public class CreditFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_credit, container, false);
         FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
         fab.setOnClickListener(this::fabClick);
+
+        Transaction t1 = new Transaction("Descrição", "01/01/2019", 10.50, new Category("Categoria", TransactionType.CREDIT));
+        Transaction t2 = new Transaction("Descrição", "02/01/2019", 10.50, new Category("Categoria", TransactionType.CREDIT));
+
+        recyclerView = container.findViewById(R.id.recyclerview);
+        adapter = new TransactionAdapter(this, transactions);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
+
         return view;
     }
 
