@@ -8,7 +8,6 @@ import androidx.room.Update;
 
 import java.util.List;
 
-import br.edu.ifsp.financasdroid.model.TransactionType;
 import br.edu.ifsp.financasdroid.model.entity.Category;
 
 @Dao
@@ -27,7 +26,7 @@ public interface CategoryDao {
     List<Category> findAll();
 
     @Query("SELECT * FROM _category WHERE transaction_type = :transactionType")
-    List<Category> findByCategory(final TransactionType transactionType);
+    List<Category> findByCategory(final String transactionType);
 
     @Query("SELECT * FROM _category WHERE id = :id LIMIT 1")
     Category findById(final Long id);

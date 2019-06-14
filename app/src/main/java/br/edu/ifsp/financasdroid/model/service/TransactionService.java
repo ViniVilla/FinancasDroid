@@ -7,7 +7,6 @@ import androidx.room.Room;
 import java.util.List;
 
 import br.edu.ifsp.financasdroid.model.AppDatabase;
-import br.edu.ifsp.financasdroid.model.TransactionType;
 import br.edu.ifsp.financasdroid.model.entity.Transaction;
 
 public class TransactionService {
@@ -47,7 +46,7 @@ public class TransactionService {
         return transactions;
     }
 
-    public List<Transaction> findByType(final TransactionType transactionType) {
+    public List<Transaction> findByType(final String transactionType) {
         final List<Transaction> transactions = db.transactionDao().findByType(transactionType);
         for (Transaction t: transactions) {
             t.setCategory(categoryService.findById(t.getCategoryId()));

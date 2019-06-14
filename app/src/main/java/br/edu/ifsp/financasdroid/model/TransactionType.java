@@ -2,9 +2,9 @@ package br.edu.ifsp.financasdroid.model;
 
 public enum TransactionType {
 
-    CREDIT("credit"),
+    CREDIT("C"),
 
-    DEBIT("debit");
+    DEBIT("D");
 
     private String type;
 

@@ -36,10 +36,10 @@ public class CreditFragment extends Fragment {
         FloatingActionButton fab = view.findViewById(R.id.fab);
         fab.setOnClickListener(this::fabClick);
 
-        Transaction t1 = new Transaction("Descrição", "01/01/2019", 10.50, new Category("Categoria", TransactionType.CREDIT));
-        Transaction t2 = new Transaction("Descrição", "02/01/2019", 10.50, new Category("Categoria", TransactionType.CREDIT));
-        transactions.add(t1);
-        transactions.add(t2);
+//        Transaction t1 = new Transaction("Descrição", "01/01/2019", 10.50, new Category("Categoria", TransactionType.CREDIT.getType()));
+//        Transaction t2 = new Transaction("Descrição", "02/01/2019", 10.50, new Category("Categoria", TransactionType.CREDIT.getType()));
+//        transactions.add(t1);
+//        transactions.add(t2);
 
         recyclerView = view.findViewById(R.id.recyclerview);
         adapter = new TransactionAdapter(this, transactions);

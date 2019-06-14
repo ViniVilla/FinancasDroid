@@ -40,7 +40,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
 
         description.setText(categories.get(position).getDescription());
         String typeS;
-        if(categories.get(position).getTransactionType() == TransactionType.CREDIT){
+        if(categories.get(position).getTransactionType().equals(TransactionType.CREDIT)){
             typeS = parentFragment.getString(R.string.credit);
         } else{
             typeS = parentFragment.getString(R.string.debit);

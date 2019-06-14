@@ -4,8 +4,6 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-import br.edu.ifsp.financasdroid.model.TransactionType;
-
 @Entity(tableName = "_category")
 public class Category {
 
@@ -16,12 +14,7 @@ public class Category {
     private String description;
 
     @ColumnInfo(name = "transaction_type")
-    private TransactionType transactionType;
-
-    public Category(String description, TransactionType transactionType) {
-        this.description = description;
-        this.transactionType = transactionType;
-    }
+    private String transactionType;
 
     public Long getId() {
         return id;
@@ -39,11 +32,11 @@ public class Category {
         this.description = description;
     }
 
-    public TransactionType getTransactionType() {
+    public String getTransactionType() {
         return transactionType;
     }
 
-    public void setTransactionType(TransactionType transactionType) {
+    public void setTransactionType(String transactionType) {
         this.transactionType = transactionType;
     }
 }

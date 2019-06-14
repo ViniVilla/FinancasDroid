@@ -36,10 +36,10 @@ public class DebitFragment extends Fragment {
         FloatingActionButton fab = view.findViewById(R.id.fab);
         fab.setOnClickListener(this::fabClick);
 
-        Transaction t1 = new Transaction("Descrição", "01/01/2019", 10.50, new Category("Categoria", TransactionType.DEBIT));
-        Transaction t2 = new Transaction("Descrição", "02/01/2019", 10.50, new Category("Categoria", TransactionType.DEBIT));
-        transactions.add(t1);
-        transactions.add(t2);
+//        Transaction t1 = new Transaction("Descrição", "01/01/2019", 10.50, new Category("Categoria", TransactionType.DEBIT.getType()));
+//        Transaction t2 = new Transaction("Descrição", "02/01/2019", 10.50, new Category("Categoria", TransactionType.DEBIT.getType()));
+//        transactions.add(t1);
+//        transactions.add(t2);
 
         recyclerView = view.findViewById(R.id.recyclerview);
         adapter = new TransactionAdapter(this, transactions);
