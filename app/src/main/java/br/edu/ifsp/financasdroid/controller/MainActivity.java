@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import com.google.android.material.navigation.NavigationView;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -55,22 +56,28 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
+        ActionBar actionBar = getSupportActionBar();
 
         if (id == R.id.nav_categories) {
             CategoriesFragment categoriesFragment = new CategoriesFragment();
             showFragment(categoriesFragment);
+            actionBar.setTitle(R.string.categories);
         } else if (id == R.id.nav_credit) {
             CreditFragment creditFragment = new CreditFragment();
             showFragment(creditFragment);
+            actionBar.setTitle(R.string.credit);
         } else if (id == R.id.nav_debit) {
             DebitFragment debitFragment = new DebitFragment();
             showFragment(debitFragment);
+            actionBar.setTitle(R.string.debit);
         } else if (id == R.id.nav_budget) {
             BudgetFragment budgetFragment = new BudgetFragment();
             showFragment(budgetFragment);
+            actionBar.setTitle(R.string.budget);
         } else if (id == R.id.nav_chart){
             ChartFragment chartFragment = new ChartFragment();
             showFragment(chartFragment);
+            actionBar.setTitle(R.string.chart);
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
