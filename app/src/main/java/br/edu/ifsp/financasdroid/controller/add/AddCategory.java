@@ -19,12 +19,6 @@ public class AddCategory extends AppCompatActivity {
 
     private RadioGroup radioGroup;
 
-    private Button button;
-
-    private String type;
-
-    private String description;
-
     private CategoryService categoryService;
 
     @Override
@@ -36,7 +30,7 @@ public class AddCategory extends AppCompatActivity {
 
         editText = findViewById(R.id.editText);
         radioGroup = findViewById(R.id.radioType);
-        button = findViewById(R.id.button);
+        Button button = findViewById(R.id.button);
 
         categoryService = new CategoryService(this);
 
@@ -44,15 +38,15 @@ public class AddCategory extends AppCompatActivity {
     }
 
     private void onClick(View view) {
-        RadioButton radioButton = view.findViewById(radioGroup.getCheckedRadioButtonId());
-        type = radioButton.getText().toString();
-        description = editText.getText().toString();
-        if (!"".equals(description) && type != null) {
+        RadioButton radioButton = radioGroup.findViewById(radioGroup.getCheckedRadioButtonId());
+        String type = radioButton.getText().toString();
+        String description = editText.getText().toString();
+        if (!"".equals(description) && !"".equals(type)) {
             Category category = new Category();
             category.setDescription(description);
             category.setTransactionType(view.getResources().getString(R.string.credit).equals(type)? "C" : "D");
             categoryService.save(category);
         }
-
+        finish();
     }
 }

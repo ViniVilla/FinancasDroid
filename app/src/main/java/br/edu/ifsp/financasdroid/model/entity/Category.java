@@ -16,6 +16,13 @@ public class Category {
     @ColumnInfo(name = "transaction_type")
     private String transactionType;
 
+    public Category(){}
+
+    public Category(String description, String transactionType) {
+        this.description = description;
+        this.transactionType = transactionType;
+    }
+
     public Long getId() {
         return id;
     }

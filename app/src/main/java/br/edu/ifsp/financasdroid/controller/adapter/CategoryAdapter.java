@@ -3,26 +3,29 @@ package br.edu.ifsp.financasdroid.controller.adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
-
-import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.List;
+
 import br.edu.ifsp.financasdroid.R;
+import br.edu.ifsp.financasdroid.controller.fragment.CategoriesFragment;
 import br.edu.ifsp.financasdroid.model.TransactionType;
 import br.edu.ifsp.financasdroid.model.entity.Category;
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder> {
 
     private List<Category> categories;
-    private Fragment parentFragment;
+    private CategoriesFragment parentFragment;
     private LayoutInflater inflater;
 
     public CategoryAdapter(Fragment parentFragment, List<Category> categories){
         this.categories = categories;
-        this.parentFragment = parentFragment;
+        this.parentFragment = (CategoriesFragment) parentFragment;
         this.inflater = LayoutInflater.from(parentFragment.getContext());
     }
 
@@ -37,15 +40,18 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
     public void onBindViewHolder(@NonNull CategoryViewHolder holder, int position) {
         TextView description = holder.itemView.findViewById(R.id.description);
         TextView type = holder.itemView.findViewById(R.id.type);
+        Button remove = holder.itemView.findViewById(R.id.remove);
 
         description.setText(categories.get(position).getDescription());
         String typeS;
-        if(categories.get(position).getTransactionType().equals(TransactionType.CREDIT)){
+        if(categories.get(position).getTransactionType().equals(TransactionType.CREDIT.getType())){
             typeS = parentFragment.getString(R.string.credit);
         } else{
             typeS = parentFragment.getString(R.string.debit);
         }
         type.setText(parentFragment.getString(R.string.type) + typeS);
+
+        remove.setOnClickListener(view -> parentFragment.removeCategory(position));
     }
 
     @Override
@@ -53,8 +59,8 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         return categories.size();
     }
 
-    public class CategoryViewHolder extends RecyclerView.ViewHolder {
-        public CategoryViewHolder(@NonNull View itemView) {
+    class CategoryViewHolder extends RecyclerView.ViewHolder {
+        CategoryViewHolder(@NonNull View itemView) {
             super(itemView);
         }
     }

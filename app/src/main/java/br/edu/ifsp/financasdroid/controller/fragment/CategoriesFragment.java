@@ -38,24 +38,31 @@ public class CategoriesFragment extends Fragment {
         FloatingActionButton fab = view.findViewById(R.id.fab);
         fab.setOnClickListener(this::fabClick);
 
-//        Category c1 = new Category("Descrição", TransactionType.CREDIT.getType());
-//        Category c2 = new Category("Descrição", TransactionType.DEBIT.getType());
-//
-//        categories.add(c1);
-//        categories.add(c2);
         categoryService = new CategoryService(view.getContext());
-        categories = categoryService.findAll();
 
-        updateRecyclerView(view);
+        recyclerView = view.findViewById(R.id.recyclerview);
+
+        updateRecyclerView();
 
         return view;
     }
 
-    private void updateRecyclerView(View view) {
-        recyclerView = view.findViewById(R.id.recyclerview);
+    public void removeCategory(int position) {
+        categoryService.delete(categories.get(position));
+        updateRecyclerView();
+    }
+
+    private void updateRecyclerView() {
+        categories = categoryService.findAll();
         adapter = new CategoryAdapter(this, categories);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        updateRecyclerView();
     }
 
     private void fabClick(View v) {
