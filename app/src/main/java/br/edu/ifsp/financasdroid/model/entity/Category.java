@@ -1,5 +1,7 @@
 package br.edu.ifsp.financasdroid.model.entity;
 
+import java.util.Objects;
+
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
@@ -45,5 +47,15 @@ public class Category {
 
     public void setTransactionType(String transactionType) {
         this.transactionType = transactionType;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Category category = (Category) o;
+        return id == category.id &&
+                description.equals(category.description) &&
+                transactionType.equals(category.transactionType);
     }
 }
