@@ -5,4 +5,15 @@
     <color name="colorAccent">#D81B60</color>
     <color name="background">#333333</color>
     <color name="backgroundShape">#464646</color>
+
+    <color name="green900">#1b5e20</color>
+    <color name="green800">#2e7d32</color>
+    <color name="green700">#388e3c</color>
+    <color name="green600">#43a047</color>
+    <color name="green500">#4caf50</color>
+    <color name="green400">#66bb6a</color>
+    <color name="lime500">#cddc39</color>
+    <color name="lime600">#c0ca33</color>
+    <color name="lime700">#afb42b</color>
+    <color name="limeA700">#aeea00</color>
 </resources>

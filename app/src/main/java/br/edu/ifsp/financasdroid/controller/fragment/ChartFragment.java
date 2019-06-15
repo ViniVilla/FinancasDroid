@@ -1,5 +1,6 @@
 package br.edu.ifsp.financasdroid.controller.fragment;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,6 +15,7 @@ import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -32,6 +34,19 @@ public class ChartFragment extends Fragment {
 
     private TransactionService transactionService;
 
+    private int[] COLORS = new int[] {
+            R.color.green900,
+            R.color.green700,
+            R.color.green500,
+            R.color.lime500,
+            R.color.lime700,
+            R.color.green800,
+            R.color.green600,
+            R.color.green400,
+            R.color.lime600,
+            R.color.limeA700
+    };
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -45,8 +60,7 @@ public class ChartFragment extends Fragment {
         pieChart.setDragDecelerationFrictionCoef(0.95f);
 
         pieChart.setDrawHoleEnabled(true);
-        pieChart.setHoleColor(Color.WHITE);
-        pieChart.setTransparentCircleRadius(61f);
+        pieChart.setHoleColor(R.color.background);
 
         transactionService = new TransactionService(getContext());
         Map<String, List<Transaction>> transactions = transactionService
@@ -66,12 +80,14 @@ public class ChartFragment extends Fragment {
         PieDataSet dataSet = new PieDataSet(pieData, "Débitos");
         dataSet.setSliceSpace(3f);
         dataSet.setSelectionShift(5f);
-        dataSet.setColors(ColorTemplate.MATERIAL_COLORS);
+        dataSet.setColors(COLORS, getContext());
 
-        pieChart.animateY(1000, Easing.EaseInCubic);
+        pieChart.animateY(1000, Easing.EaseInCirc);
         PieData data = new PieData(dataSet);
         data.setValueTextSize(10f);
         data.setValueTextColor(Color.WHITE);
+
+        pieChart.getLegend().setEnabled(false);
 
         pieChart.setData(data);
 
