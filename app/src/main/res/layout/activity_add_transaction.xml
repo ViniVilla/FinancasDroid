@@ -44,23 +44,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinner" />
 
-    <EditText
+    <TextView
         android:id="@+id/date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="@string/date"
-        android:inputType="date"
-        android:textColor="@android:color/white"
-        android:textColorHint="@android:color/white"
-        app:backgroundTint="@android:color/white"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:text="@string/select_date"
+        android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/value"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/description"
-        android:maxLength="10"
-        android:digits="0123456789/"/>
+        app:layout_constraintTop_toBottomOf="@+id/description" />
 
     <EditText
         android:id="@+id/value"
@@ -72,14 +67,14 @@
         android:textColor="@android:color/white"
         android:textColorHint="@android:color/white"
         app:backgroundTint="@android:color/white"
-        app:layout_constraintBottom_toTopOf="@+id/button2"
+        app:layout_constraintBottom_toTopOf="@+id/add"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/date" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/shape_button"
@@ -89,5 +84,21 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/value" />
+
+    <ImageView
+        android:id="@+id/imageDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/value"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/date"
+        app:layout_constraintTop_toBottomOf="@+id/description"
+        app:srcCompat="@drawable/ic_date" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

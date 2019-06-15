@@ -8,7 +8,12 @@ import android.view.ViewGroup;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import androidx.annotation.NonNull;
@@ -35,6 +40,9 @@ public class CreditFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_credit, container, false);
         FloatingActionButton fab = view.findViewById(R.id.fab);
         fab.setOnClickListener(this::fabClick);
+
+        Date date = new Date();
+        DateFormat format = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 
 //        Transaction t1 = new Transaction("Descrição", "01/01/2019", 10.50, new Category("Categoria", TransactionType.CREDIT.getType()));
 //        Transaction t2 = new Transaction("Descrição", "02/01/2019", 10.50, new Category("Categoria", TransactionType.CREDIT.getType()));

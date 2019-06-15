@@ -18,4 +18,5 @@
     <string name="description">Descrição</string>
     <string name="date">Data</string>
     <string name="value">Valor</string>
+    <string name="select_date">Selecionar Data</string>
 </resources>

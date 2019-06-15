@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".controller.add.AddTransaction"></activity>
+        <activity android:name=".controller.add.AddTransaction"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".controller.add.AddCategory"
             android:screenOrientation="portrait" />
