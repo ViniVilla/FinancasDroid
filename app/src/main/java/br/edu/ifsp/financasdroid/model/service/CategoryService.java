@@ -47,4 +47,8 @@ public class CategoryService {
         return db.categoryDao().findById(id);
     }
 
+    public Boolean isSaved(final String description) {
+        return db.categoryDao().isSaved(description) == 1;
+    }
+
 }

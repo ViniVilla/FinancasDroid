@@ -1,12 +1,21 @@
 package br.edu.ifsp.financasdroid.model.service;
 
 import android.content.Context;
+import android.util.Pair;
 
 import androidx.room.Room;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import br.edu.ifsp.financasdroid.model.AppDatabase;
+import br.edu.ifsp.financasdroid.model.TransactionType;
+import br.edu.ifsp.financasdroid.model.entity.Category;
 import br.edu.ifsp.financasdroid.model.entity.Transaction;
 
 public class TransactionService {
@@ -58,6 +67,29 @@ public class TransactionService {
         Transaction transaction = db.transactionDao().findById(id);
         transaction.setCategory(categoryService.findById(transaction.getCategoryId()));
         return transaction;
+    }
+
+    public Map<String, List<Transaction>> findByTypeSortedByCategory(final TransactionType transactionType) {
+//        final List<Transaction> transactions = findByType(transactionType.getType());
+        final List<Transaction> transactions = Arrays.asList(new Transaction[] {
+                new Transaction("Compra do Mês", "14/06/2019", 150.0, new Category("Mercado", TransactionType.DEBIT.getType())),
+                new Transaction("Compra do Mês", "14/06/2019", 50.0, new Category("Mercado", TransactionType.DEBIT.getType())),
+                new Transaction("Combustível", "14/06/2019", 150.0, new Category("Transporte", TransactionType.DEBIT.getType())),
+                new Transaction("Uber", "14/06/2019", 16.0, new Category("Transporte", TransactionType.DEBIT.getType())),
+                new Transaction("Farmácia", "14/06/2019", 35.0, new Category("Farmácia", TransactionType.DEBIT.getType()))
+        });
+        final Map<String, List<Transaction>> sorted = new HashMap<>();
+
+        for (Transaction t: transactions) {
+            if (sorted.containsKey(t.getCategory().getDescription())) {
+                sorted.get(t.getCategory().getDescription()).add(t);
+            } else {
+                List<Transaction> newEntry = new ArrayList<>();
+                newEntry.add(t);
+                sorted.put(t.getCategory().getDescription(), newEntry);
+            }
+        }
+        return sorted;
     }
 
 }

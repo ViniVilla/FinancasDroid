@@ -30,4 +30,7 @@ public interface CategoryDao {
 
     @Query("SELECT * FROM _category WHERE id = :id LIMIT 1")
     Category findById(final Long id);
+
+    @Query("SELECT COUNT(*) FROM _category WHERE description = :description")
+    int isSaved(final String description);
 }
