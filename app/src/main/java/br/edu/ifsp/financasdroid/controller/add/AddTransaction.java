@@ -24,9 +24,9 @@ public class AddTransaction extends AppCompatActivity implements DatePickerDialo
 
         String type = getIntent().getStringExtra("type");
 
-        if(type.equals(TransactionType.DEBIT)){
+        if(type.equals(TransactionType.DEBIT.getType())){
             getSupportActionBar().setTitle(getString(R.string.add_debit_transaction));
-        } else if(type.equals(TransactionType.CREDIT)){
+        } else if(type.equals(TransactionType.CREDIT.getType())){
             getSupportActionBar().setTitle(getString(R.string.add_credit_transaction));
         }
 

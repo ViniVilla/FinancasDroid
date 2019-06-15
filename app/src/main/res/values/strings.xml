@@ -18,4 +18,5 @@
     <string name="date">Date</string>
     <string name="value">Value</string>
     <string name="select_date">Select Date</string>
+    <string name="difference">Difference</string>
 </resources>

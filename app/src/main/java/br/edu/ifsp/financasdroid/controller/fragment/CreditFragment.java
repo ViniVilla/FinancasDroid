@@ -44,10 +44,10 @@ public class CreditFragment extends Fragment {
         Date date = new Date();
         DateFormat format = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 
-//        Transaction t1 = new Transaction("Descrição", "01/01/2019", 10.50, new Category("Categoria", TransactionType.CREDIT.getType()));
-//        Transaction t2 = new Transaction("Descrição", "02/01/2019", 10.50, new Category("Categoria", TransactionType.CREDIT.getType()));
-//        transactions.add(t1);
-//        transactions.add(t2);
+        Transaction t1 = new Transaction("Salário", "29/05/2019", 800.00, new Category("Salario", TransactionType.CREDIT.getType()));
+        Transaction t2 = new Transaction("Vale refeição", "29/05/2019", 300.00, new Category("Salario", TransactionType.CREDIT.getType()));
+        transactions.add(t1);
+        transactions.add(t2);
 
         recyclerView = view.findViewById(R.id.recyclerview);
         adapter = new TransactionAdapter(this, transactions);
