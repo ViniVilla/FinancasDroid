@@ -5,6 +5,7 @@ import androidx.core.content.ContextCompat;
 
 import br.edu.ifsp.financasdroid.R;
 import br.edu.ifsp.financasdroid.controller.fragment.DatePickerFragment;
+import br.edu.ifsp.financasdroid.controller.service.SnackbarService;
 import br.edu.ifsp.financasdroid.model.TransactionType;
 import br.edu.ifsp.financasdroid.model.entity.Category;
 import br.edu.ifsp.financasdroid.model.entity.Transaction;
@@ -13,6 +14,7 @@ import br.edu.ifsp.financasdroid.model.service.CategoryService;
 import br.edu.ifsp.financasdroid.model.service.TransactionService;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -34,6 +36,7 @@ public class AddTransaction extends AppCompatActivity implements DatePickerDialo
     private ViewHolder viewHolder;
     private CategoryService categoryService;
     private TransactionService transactionService;
+    private SnackbarService snackbarService;
     private DatePickerFragment datePicker = new DatePickerFragment();
     private String type;
 
@@ -42,9 +45,10 @@ public class AddTransaction extends AppCompatActivity implements DatePickerDialo
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_transaction);
 
-        this.viewHolder = new ViewHolder();
+        viewHolder = new ViewHolder();
         categoryService = new CategoryService(this);
         transactionService = new TransactionService(this);
+        snackbarService = new SnackbarService(viewHolder.add);
 
         type = getIntent().getStringExtra("type");
 
@@ -86,30 +90,31 @@ public class AddTransaction extends AppCompatActivity implements DatePickerDialo
         try {
             Transaction transaction = readInputData();
             transactionService.save(transaction);
+            setResult(RESULT_OK);
+            finish();
+        } catch (ValidationException e) {
+            snackbarService.make(e.getMessage(), SnackbarService.SnackType.WARNING);
         } catch (Exception e) {
-            Snackbar snackbar = Snackbar.make(viewHolder.add, R.string.save_transaction_error_message, Snackbar.LENGTH_LONG);
-            View snackbarView = snackbar.getView();
-            snackbarView.setBackgroundColor(getResources().getColor(R.color.green900));
-            snackbar.show();
+            snackbarService.make(getResources().getString(R.string.save_transaction_error_message),
+                    SnackbarService.SnackType.ERROR);
         }
     }
 
     private Transaction readInputData() {
         Transaction transaction = new Transaction();
         final Category category = (Category) viewHolder.spinner.getSelectedItem();
-        final String date = datePicker.getFormattedDate();
+        final String date = viewHolder.date.getText().toString();
         final String stringValue = viewHolder.value.getText().toString();
         final String description = viewHolder.description.getText().toString();
 
-        if (date == null || date.isEmpty()) {
+        if (date.isEmpty() || date.equals(getResources().getString(R.string.select_date))) {
             throw new ValidationException(getResources().getString(R.string.save_transaction_invalid_date));
         }
         if (stringValue.isEmpty()) {
             throw new ValidationException(getResources().getString(R.string.save_transaction_invalid_value));
         }
-        // TODO tratar valores não numéricos e negativos e description vazia
-        final Double value = Double.parseDouble(stringValue);
 
+        final Double value = Double.parseDouble(stringValue);
         transaction.setCategory(category);
         transaction.setDate(date);
         transaction.setValue(value);

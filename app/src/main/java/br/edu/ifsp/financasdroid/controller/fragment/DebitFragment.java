@@ -6,22 +6,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import br.edu.ifsp.financasdroid.R;
 import br.edu.ifsp.financasdroid.controller.adapter.TransactionAdapter;
 import br.edu.ifsp.financasdroid.controller.add.AddTransaction;
-import br.edu.ifsp.financasdroid.R;
-import br.edu.ifsp.financasdroid.model.AppDatabase;
 import br.edu.ifsp.financasdroid.model.TransactionType;
-import br.edu.ifsp.financasdroid.model.entity.Category;
 import br.edu.ifsp.financasdroid.model.entity.Transaction;
 import br.edu.ifsp.financasdroid.model.service.TransactionService;
 
@@ -42,11 +41,7 @@ public class DebitFragment extends Fragment {
         transactionService = new TransactionService(getContext());
         transactions = transactionService.findByType(TransactionType.DEBIT.getType());
 
-        recyclerView = view.findViewById(R.id.recyclerview);
-        adapter = new TransactionAdapter(this, transactions);
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
-
+        updateRecyclerView(view);
         return view;
     }
 
@@ -55,4 +50,18 @@ public class DebitFragment extends Fragment {
         intent.putExtra("type", "D");
         startActivityForResult(intent, 1);
     }
+
+    private void updateRecyclerView(View view) {
+        transactions = transactionService.findByType(TransactionType.DEBIT.getType());
+        recyclerView = view.findViewById(R.id.recyclerview);
+        adapter = new TransactionAdapter(this, transactions);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        updateRecyclerView(recyclerView);
+    }
+
 }
