@@ -70,14 +70,7 @@ public class TransactionService {
     }
 
     public Map<String, List<Transaction>> findByTypeSortedByCategory(final TransactionType transactionType) {
-//        final List<Transaction> transactions = findByType(transactionType.getType());
-        final List<Transaction> transactions = Arrays.asList(new Transaction[] {
-                new Transaction("Compra do Mês", "14/06/2019", 150.0, new Category("Mercado", TransactionType.DEBIT.getType())),
-                new Transaction("Compra do Mês", "14/06/2019", 50.0, new Category("Mercado", TransactionType.DEBIT.getType())),
-                new Transaction("Combustível", "14/06/2019", 150.0, new Category("Transporte", TransactionType.DEBIT.getType())),
-                new Transaction("Uber", "14/06/2019", 16.0, new Category("Transporte", TransactionType.DEBIT.getType())),
-                new Transaction("Farmácia", "14/06/2019", 35.0, new Category("Farmácia", TransactionType.DEBIT.getType()))
-        });
+        final List<Transaction> transactions = findByType(transactionType.getType());
         final Map<String, List<Transaction>> sorted = new HashMap<>();
 
         for (Transaction t: transactions) {

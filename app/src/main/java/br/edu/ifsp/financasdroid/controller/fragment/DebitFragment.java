@@ -39,7 +39,6 @@ public class DebitFragment extends Fragment {
         fab.setOnClickListener(this::fabClick);
 
         transactionService = new TransactionService(getContext());
-        transactions = transactionService.findByType(TransactionType.DEBIT.getType());
 
         updateRecyclerView(view);
         return view;
