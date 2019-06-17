@@ -51,7 +51,7 @@ public class AddTransaction extends AppCompatActivity implements DatePickerDialo
         }
 
         if(month <= 9+1){
-            monthS = "0" + month+1;
+            monthS = "0" + (month+1);
         } else{
             monthS = String.valueOf(month+1);
         }
