@@ -46,4 +46,9 @@ public class Category {
     public void setTransactionType(String transactionType) {
         this.transactionType = transactionType;
     }
+
+    @Override
+    public String toString() {
+        return description;
+    }
 }
