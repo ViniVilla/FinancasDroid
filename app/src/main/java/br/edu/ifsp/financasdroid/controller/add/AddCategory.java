@@ -8,8 +8,10 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.room.util.StringUtil;
 
 import br.edu.ifsp.financasdroid.R;
+import br.edu.ifsp.financasdroid.controller.service.SnackbarService;
 import br.edu.ifsp.financasdroid.model.TransactionType;
 import br.edu.ifsp.financasdroid.model.entity.Category;
 import br.edu.ifsp.financasdroid.model.service.CategoryService;
@@ -23,6 +25,8 @@ public class AddCategory extends AppCompatActivity {
     private RadioButton radioButton;
 
     private CategoryService categoryService;
+
+    private SnackbarService snackbarService;
 
     private Category category;
 
@@ -38,6 +42,7 @@ public class AddCategory extends AppCompatActivity {
         Button button = findViewById(R.id.button);
 
         categoryService = new CategoryService(this);
+        snackbarService = new SnackbarService(button);
 
         category = new Category();
 
@@ -61,16 +66,35 @@ public class AddCategory extends AppCompatActivity {
         radioButton = radioGroup.findViewById(radioGroup.getCheckedRadioButtonId());
         String type = radioButton.getText().toString();
         String description = editText.getText().toString();
-        if (!"".equals(description) && !"".equals(type)) {
+        if (validateForm(type, description)) {
             String oldDescription = category.getDescription();
             category.setDescription(description);
             category.setTransactionType(view.getResources().getString(R.string.credit).equals(type) ? "C" : "D");
-            if (categoryService.isSaved(oldDescription)) {
-                categoryService.update(category);
-            } else {
-                categoryService.save(category);
+            try {
+                if (categoryService.isSaved(oldDescription)) {
+                    categoryService.update(category);
+                } else {
+                    categoryService.save(category);
+                }
+                finish();
+            } catch (Exception e) {
+                snackbarService.make(getResources().getString(R.string.save_category_error_message), SnackbarService.SnackType.ERROR);
             }
         }
-        finish();
+    }
+
+    private boolean validateForm(final String type, final String description) {
+        Integer errorMsg = null;
+        if (type.isEmpty()) {
+            errorMsg = R.string.save_category_invalid_type;
+        } else if (description.isEmpty()) {
+            errorMsg = R.string.save_category_invalid_description;
+        }
+
+        if (errorMsg != null) {
+            snackbarService.make(getResources().getString(errorMsg), SnackbarService.SnackType.WARNING);
+            return false;
+        }
+        return true;
     }
 }

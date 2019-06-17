@@ -23,4 +23,7 @@
     <string name="save_transaction_error_message">Ocorreu um erro ao salvar sua transação</string>
     <string name="save_transaction_invalid_date">Você precisa selecionar uma data</string>
     <string name="save_transaction_invalid_value">Você precisa inserir um valor</string>
+    <string name="save_category_invalid_type">Você precisa selecionar uma categoria</string>
+    <string name="save_category_invalid_description">Você precisa informar uma descrição para a categoria</string>
+    <string name="save_category_error_message">Ocorreu um erro ao salvar sua categoria</string>
 </resources>

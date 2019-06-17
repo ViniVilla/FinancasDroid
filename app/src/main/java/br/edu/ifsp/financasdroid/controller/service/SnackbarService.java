@@ -1,7 +1,9 @@
 package br.edu.ifsp.financasdroid.controller.service;
 
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.view.View;
+import android.widget.TextView;
 
 import com.google.android.material.snackbar.Snackbar;
 
@@ -20,6 +22,11 @@ public class SnackbarService {
         View snackbarView = snackbar.getView();
         Resources resources = view.getContext().getResources();
         snackbarView.setBackgroundColor(resources.getColor(type.getColor()));
+
+        if (SnackType.WARNING.equals(type)) {
+            TextView tv = snackbarView.findViewById(com.google.android.material.R.id.snackbar_text);
+            tv.setTextColor(Color.BLACK);
+        }
         snackbar.show();
     }
 
