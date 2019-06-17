@@ -26,7 +26,7 @@ public interface TransactionDao {
     @Query("SELECT * FROM _transaction")
     List<Transaction> findAll();
 
-    @Query("SELECT * FROM _transaction WHERE category_id = (SELECT id FROM _category WHERE transaction_type = :transactionType)")
+    @Query("SELECT * FROM _transaction WHERE category_id IN (SELECT id FROM _category WHERE transaction_type = :transactionType)")
     List<Transaction> findByType(final String transactionType);
 
     @Query("SELECT * FROM _transaction WHERE id = :id LIMIT 1")
