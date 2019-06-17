@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.os.Bundle;
 import android.widget.DatePicker;
 
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 
 import androidx.annotation.NonNull;
@@ -13,6 +14,8 @@ import androidx.fragment.app.DialogFragment;
 import br.edu.ifsp.financasdroid.R;
 
 public class DatePickerFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener{
+
+    private String formattedDate;
 
     @NonNull
     @Override
@@ -26,6 +29,15 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
 
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+        StringBuilder sb = new StringBuilder(dayOfMonth);
+        sb.append("/");
+        sb.append(month);
+        sb.append("/");
+        sb.append(year);
+        this.formattedDate = sb.toString();
+    }
 
+    public String getFormattedDate() {
+        return formattedDate;
     }
 }

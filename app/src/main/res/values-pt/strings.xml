@@ -20,4 +20,7 @@
     <string name="value">Valor</string>
     <string name="select_date">Selecionar Data</string>
     <string name="difference">Diferença</string>
+    <string name="save_transaction_error_message">Ocorreu um erro ao salvar sua transação</string>
+    <string name="save_transaction_invalid_date">Você precisa selecionar uma data</string>
+    <string name="save_transaction_invalid_value">Você precisa inserir um valor</string>
 </resources>

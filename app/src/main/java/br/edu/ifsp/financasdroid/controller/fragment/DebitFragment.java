@@ -19,15 +19,18 @@ import androidx.recyclerview.widget.RecyclerView;
 import br.edu.ifsp.financasdroid.controller.adapter.TransactionAdapter;
 import br.edu.ifsp.financasdroid.controller.add.AddTransaction;
 import br.edu.ifsp.financasdroid.R;
+import br.edu.ifsp.financasdroid.model.AppDatabase;
 import br.edu.ifsp.financasdroid.model.TransactionType;
 import br.edu.ifsp.financasdroid.model.entity.Category;
 import br.edu.ifsp.financasdroid.model.entity.Transaction;
+import br.edu.ifsp.financasdroid.model.service.TransactionService;
 
 public class DebitFragment extends Fragment {
 
     private RecyclerView recyclerView;
     private TransactionAdapter adapter;
     private List<Transaction> transactions = new ArrayList<>();
+    private TransactionService transactionService;
 
     @Nullable
     @Override
@@ -36,10 +39,8 @@ public class DebitFragment extends Fragment {
         FloatingActionButton fab = view.findViewById(R.id.fab);
         fab.setOnClickListener(this::fabClick);
 
-        Transaction t1 = new Transaction("Comida", "01/06/2019", 300.00, new Category("Mercado", TransactionType.DEBIT.getType()));
-        Transaction t2 = new Transaction("Remédios", "25/05/2019", 75.00, new Category("Farmácia", TransactionType.DEBIT.getType()));
-        transactions.add(t1);
-        transactions.add(t2);
+        transactionService = new TransactionService(getContext());
+        transactions = transactionService.findByType(TransactionType.DEBIT.getType());
 
         recyclerView = view.findViewById(R.id.recyclerview);
         adapter = new TransactionAdapter(this, transactions);

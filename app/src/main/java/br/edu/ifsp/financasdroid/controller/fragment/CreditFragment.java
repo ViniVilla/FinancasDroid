@@ -24,14 +24,17 @@ import androidx.recyclerview.widget.RecyclerView;
 import br.edu.ifsp.financasdroid.controller.adapter.TransactionAdapter;
 import br.edu.ifsp.financasdroid.controller.add.AddTransaction;
 import br.edu.ifsp.financasdroid.R;
+import br.edu.ifsp.financasdroid.model.AppDatabase;
 import br.edu.ifsp.financasdroid.model.TransactionType;
 import br.edu.ifsp.financasdroid.model.entity.Category;
 import br.edu.ifsp.financasdroid.model.entity.Transaction;
+import br.edu.ifsp.financasdroid.model.service.TransactionService;
 
 public class CreditFragment extends Fragment {
 
     private RecyclerView recyclerView;
     private TransactionAdapter adapter;
+    private TransactionService transactionService;
     private List<Transaction> transactions = new ArrayList<>();
 
     @Nullable
@@ -41,14 +44,9 @@ public class CreditFragment extends Fragment {
         FloatingActionButton fab = view.findViewById(R.id.fab);
         fab.setOnClickListener(this::fabClick);
 
-        Date date = new Date();
-        DateFormat format = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        this.transactionService = new TransactionService(getContext());
 
-        Transaction t1 = new Transaction("Salário", "29/05/2019", 800.00, new Category("Salario", TransactionType.CREDIT.getType()));
-        Transaction t2 = new Transaction("Vale refeição", "29/05/2019", 300.00, new Category("Salario", TransactionType.CREDIT.getType()));
-        transactions.add(t1);
-        transactions.add(t2);
-
+        transactions = transactionService.findByType(TransactionType.CREDIT.getType());
         recyclerView = view.findViewById(R.id.recyclerview);
         adapter = new TransactionAdapter(this, transactions);
         recyclerView.setAdapter(adapter);
