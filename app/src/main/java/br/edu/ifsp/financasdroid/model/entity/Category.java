@@ -51,4 +51,13 @@ public class Category {
     public String toString() {
         return description;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this.getDescription().equals(((Category) o).getDescription())
+                && this.getTransactionType().equals(((Category) o).getTransactionType())) {
+            return true;
+        }
+        return false;
+    }
 }

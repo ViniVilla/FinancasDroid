@@ -51,4 +51,8 @@ public class CategoryService {
         return db.categoryDao().isSaved(description) == 1;
     }
 
+    public Boolean contais(final Category category) {
+        return findAll().contains(category);
+    }
+
 }

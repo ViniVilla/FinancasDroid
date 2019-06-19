@@ -71,7 +71,7 @@ public class AddCategory extends AppCompatActivity {
             category.setDescription(description);
             category.setTransactionType(view.getResources().getString(R.string.credit).equals(type) ? "C" : "D");
             try {
-                if (categoryService.isSaved(oldDescription)) {
+                if (categoryService.isSaved(oldDescription) || categoryService.contais(category)) {
                     categoryService.update(category);
                 } else {
                     categoryService.save(category);
