@@ -54,7 +54,7 @@ public class CreditFragment extends Fragment {
     private void updateRecyclerView(View view) {
         transactions = transactionService.findByType(TransactionType.CREDIT.getType());
         recyclerView = view.findViewById(R.id.recyclerview);
-        adapter = new TransactionAdapter(this, transactions);
+        adapter = new TransactionAdapter(this, transactions, TransactionType.CREDIT);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
     }

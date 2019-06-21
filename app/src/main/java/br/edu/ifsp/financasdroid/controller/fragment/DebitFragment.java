@@ -53,7 +53,7 @@ public class DebitFragment extends Fragment {
     private void updateRecyclerView(View view) {
         transactions = transactionService.findByType(TransactionType.DEBIT.getType());
         recyclerView = view.findViewById(R.id.recyclerview);
-        adapter = new TransactionAdapter(this, transactions);
+        adapter = new TransactionAdapter(this, transactions, TransactionType.DEBIT);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
     }
