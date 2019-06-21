@@ -69,6 +69,10 @@ public class TransactionService {
         return transaction;
     }
 
+    public List<Transaction> findByTypeAndPeriod(final String transactionType, final Date dateFrom, final Date dateTo) {
+        return db.transactionDao().findByTypeAndPeriod(transactionType, dateFrom, dateTo);
+    }
+
     public Map<String, List<Transaction>> findByTypeSortedByCategory(final TransactionType transactionType) {
         final List<Transaction> transactions = findByType(transactionType.getType());
         final Map<String, List<Transaction>> sorted = new HashMap<>();

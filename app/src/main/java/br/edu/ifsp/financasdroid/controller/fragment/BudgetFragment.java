@@ -11,7 +11,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import java.text.NumberFormat;
 import java.util.List;
+import java.util.Locale;
 
 import br.edu.ifsp.financasdroid.R;
 import br.edu.ifsp.financasdroid.model.TransactionType;
@@ -47,11 +49,11 @@ public class BudgetFragment extends Fragment {
 
         budgetText = view.findViewById(R.id.difference);
 
-        dateFrom = view.findViewById(R.id.dateFrom);
-        dateFrom.setOnClickListener(this::showDateDialog);
-        dateTo = view.findViewById(R.id.dateTo);
-        dateTo.setOnClickListener(this::showDateDialog);
-
+//        dateFrom = view.findViewById(R.id.dateFrom);
+//        dateFrom.setOnClickListener(this::showDateDialog);
+//        dateTo = view.findViewById(R.id.dateTo);
+//        dateTo.setOnClickListener(this::showDateDialog);
+        calculate();
         return view;
     }
 
@@ -60,7 +62,21 @@ public class BudgetFragment extends Fragment {
     }
 
     private void calculate() {
-//        List<Transaction> credits = transactionService.findByTypeSortedByCategory(TransactionType.CREDIT.getType(), )
+        List<Transaction> credits = transactionService.findByType(TransactionType.CREDIT.getType());
+        List<Transaction> debits = transactionService.findByType(TransactionType.DEBIT.getType());
+        double creditAmount = 0;
+        double debitAmount = 0;
+        for (Transaction t : credits) {
+            creditAmount += t.getValue();
+        }
+        for (Transaction t : debits) {
+            debitAmount += t.getValue();
+        }
+        NumberFormat format = NumberFormat.getCurrencyInstance(new Locale("PT", "BR"));
+
+        debitText.setText(format.format(debitAmount));
+        creditText.setText(format.format(creditAmount));
+        budgetText.setText(format.format(creditAmount - debitAmount));
     }
 
 }
