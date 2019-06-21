@@ -8,7 +8,6 @@ import androidx.room.Update;
 
 import java.util.List;
 
-import br.edu.ifsp.financasdroid.model.TransactionType;
 import br.edu.ifsp.financasdroid.model.entity.Transaction;
 
 @Dao

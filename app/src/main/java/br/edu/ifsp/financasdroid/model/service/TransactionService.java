@@ -44,7 +44,7 @@ public class TransactionService {
     }
 
     public void update(final Transaction transaction) {
-        db.transactionDao().delete(transaction);
+        db.transactionDao().update(transaction);
     }
 
     public List<Transaction> findAll() {

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -17,6 +18,8 @@ import java.util.Locale;
 
 import br.edu.ifsp.financasdroid.R;
 import br.edu.ifsp.financasdroid.controller.add.AddTransaction;
+import br.edu.ifsp.financasdroid.controller.fragment.CreditFragment;
+import br.edu.ifsp.financasdroid.controller.fragment.DebitFragment;
 import br.edu.ifsp.financasdroid.model.TransactionType;
 import br.edu.ifsp.financasdroid.model.entity.Transaction;
 
@@ -49,6 +52,7 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
         TextView date = holder.itemView.findViewById(R.id.date);
         TextView description = holder.itemView.findViewById(R.id.description);
         NumberFormat format = NumberFormat.getCurrencyInstance(new Locale("PT","BR"));
+        Button remove = holder.itemView.findViewById(R.id.remove);
 
         category.setText(transactions.get(position).getCategory().getDescription());
         value.setText(format.format(transactions.get(position).getValue()));
@@ -57,6 +61,15 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
 
         date.setText(formato.format(transactions.get(position).getDate()));
         description.setText(transactions.get(position).getDescription());
+
+        remove.setOnClickListener(view -> {
+            if (type.equals(TransactionType.CREDIT)) {
+                ((CreditFragment) parentFragment).removeTransaction(position);
+            } else if (type.equals(TransactionType.DEBIT)) {
+                ((DebitFragment) parentFragment).removeTransaction(position);
+            }
+        });
+
 
         holder.itemView.setOnLongClickListener(view -> {
             Transaction transaction = transactions.get(position);

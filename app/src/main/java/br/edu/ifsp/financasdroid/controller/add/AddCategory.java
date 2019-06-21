@@ -76,6 +76,7 @@ public class AddCategory extends AppCompatActivity {
                 } else {
                     categoryService.save(category);
                 }
+                setResult(RESULT_OK);
                 finish();
             } catch (Exception e) {
                 snackbarService.make(getResources().getString(R.string.save_category_error_message), SnackbarService.SnackType.ERROR);

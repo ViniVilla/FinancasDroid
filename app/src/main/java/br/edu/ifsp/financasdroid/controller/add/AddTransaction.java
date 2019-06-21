@@ -99,7 +99,12 @@ public class AddTransaction extends AppCompatActivity implements DatePickerDialo
     private void addTransaction(final View view) {
         try {
             transaction = readInputData();
-            transactionService.save(transaction);
+            if (transaction.getId() != null) {
+                transactionService.update(transaction);
+                transaction = transactionService.findById(transaction.getId());
+            } else {
+                transactionService.save(transaction);
+            }
             setResult(RESULT_OK);
             finish();
         } catch (ValidationException e) {
