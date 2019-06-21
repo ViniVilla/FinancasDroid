@@ -2,6 +2,7 @@ package br.edu.ifsp.financasdroid.model.entity;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "_category")
@@ -18,6 +19,7 @@ public class Category {
 
     public Category(){}
 
+    @Ignore
     public Category(String description, String transactionType) {
         this.description = description;
         this.transactionType = transactionType;
