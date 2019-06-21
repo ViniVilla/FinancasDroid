@@ -57,7 +57,7 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
         category.setText(transactions.get(position).getCategory().getDescription());
         value.setText(format.format(transactions.get(position).getValue()));
 
-        SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
 
         date.setText(formato.format(transactions.get(position).getDate()));
         description.setText(transactions.get(position).getDescription());

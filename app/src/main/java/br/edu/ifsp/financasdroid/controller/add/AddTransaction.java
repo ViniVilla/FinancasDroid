@@ -28,6 +28,7 @@ import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
@@ -69,6 +70,10 @@ public class AddTransaction extends AppCompatActivity implements DatePickerDialo
             transaction = transactionService.findById(id);
             viewHolder.description.setText(transaction.getDescription());
             viewHolder.value.setText(transaction.getValue().toString());
+
+            SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+
+            viewHolder.date.setText(format.format(transaction.getDate()));
 
         }
     }
