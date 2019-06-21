@@ -138,7 +138,7 @@ public class AddTransaction extends AppCompatActivity implements DatePickerDialo
 
         String[] d = date.split("/");
 
-        transaction.setDate(new Date(Integer.parseInt(d[2]), Integer.parseInt(d[1]), Integer.parseInt(d[0])));
+        transaction.setDate(new Date(Integer.parseInt(d[2]) - 1900, Integer.parseInt(d[1]) - 1, Integer.parseInt(d[0])));
 
         transaction.setValue(value);
         transaction.setCategoryId(category.getId());

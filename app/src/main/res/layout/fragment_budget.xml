@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -21,7 +20,7 @@
         android:id="@+id/credit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="R$ 50,00"
+        android:text="R$ 0,00"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/debit"
         app:layout_constraintEnd_toEndOf="parent"
@@ -45,7 +44,7 @@
         android:id="@+id/debit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="R$ 40,00"
+        android:text="R$ 0,00"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/difference"
         app:layout_constraintEnd_toEndOf="parent"
@@ -59,6 +58,7 @@
         android:layout_height="wrap_content"
         android:text="@string/difference"
         android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@id/budget"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/difference"
         app:layout_constraintStart_toStartOf="parent"
@@ -68,8 +68,9 @@
         android:id="@+id/difference"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="R$ 10,00"
+        android:text="R$ 0,00"
         android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@id/budget"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -131,4 +132,17 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/imageDateFrom"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/budget"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_button"
+        android:text="@string/budget"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/differenceText" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
