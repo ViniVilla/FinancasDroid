@@ -8,25 +8,27 @@
         android:id="@+id/creditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:text="@string/credit"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/debitText"
         app:layout_constraintEnd_toStartOf="@+id/credit"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dateFrom" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/credit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:text="R$ 0,00"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/debit"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/creditText"
-        app:layout_constraintTop_toBottomOf="@+id/dateTo" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/debitText"
@@ -76,62 +78,6 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/differenceText"
         app:layout_constraintTop_toBottomOf="@+id/debit" />
-
-    <ImageView
-        android:id="@+id/imageDateTo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/credit"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/dateTo"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_date" />
-
-    <ImageView
-        android:id="@+id/imageDateFrom"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/creditText"
-        app:layout_constraintEnd_toStartOf="@+id/dateTo"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/dateFrom"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_date" />
-
-    <TextView
-        android:id="@+id/dateFrom"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:text="10/05/2019"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/creditText"
-        app:layout_constraintEnd_toStartOf="@+id/imageDateFrom"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/dateTo"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:text="15/05/2019"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/credit"
-        app:layout_constraintEnd_toStartOf="@+id/imageDateTo"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/imageDateFrom"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/budget"

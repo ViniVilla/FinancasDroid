@@ -11,7 +11,7 @@ import br.edu.ifsp.financasdroid.model.entity.Category;
 import br.edu.ifsp.financasdroid.model.entity.Transaction;
 
 @TypeConverters({DateConverter.class})
-@Database(entities = {Category.class, Transaction.class}, version = 1, exportSchema = false)
+@Database(entities = {Category.class, Transaction.class}, version = 2, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
 
     public abstract CategoryDao categoryDao();
