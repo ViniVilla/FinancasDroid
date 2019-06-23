@@ -44,7 +44,7 @@ public class TransactionService {
     }
 
     public void update(final Transaction transaction) {
-        db.transactionDao().delete(transaction);
+        db.transactionDao().update(transaction);
     }
 
     public List<Transaction> findAll() {
@@ -67,6 +67,10 @@ public class TransactionService {
         Transaction transaction = db.transactionDao().findById(id);
         transaction.setCategory(categoryService.findById(transaction.getCategoryId()));
         return transaction;
+    }
+
+    public List<Transaction> findByTypeAndPeriod(final String transactionType, final Date dateFrom, final Date dateTo) {
+        return db.transactionDao().findByTypeAndPeriod(transactionType, dateFrom, dateTo);
     }
 
     public Map<String, List<Transaction>> findByTypeSortedByCategory(final TransactionType transactionType) {

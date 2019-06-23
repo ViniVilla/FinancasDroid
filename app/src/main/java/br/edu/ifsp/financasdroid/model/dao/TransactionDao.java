@@ -6,9 +6,9 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
+import java.util.Date;
 import java.util.List;
 
-import br.edu.ifsp.financasdroid.model.TransactionType;
 import br.edu.ifsp.financasdroid.model.entity.Transaction;
 
 @Dao
@@ -31,4 +31,7 @@ public interface TransactionDao {
 
     @Query("SELECT * FROM _transaction WHERE id = :id LIMIT 1")
     Transaction findById(final Long id);
+
+    @Query("SELECT * FROM _transaction WHERE category_id IN (SELECT id FROM _category WHERE transaction_type = :transactionType) AND date BETWEEN :dateFrom AND :dateTo")
+    List<Transaction> findByTypeAndPeriod(final String transactionType, final Date dateFrom, final Date dateTo);
 }

@@ -1,18 +1,26 @@
 package br.edu.ifsp.financasdroid.controller.adapter;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
-
-import java.text.NumberFormat;
-import java.util.List;
-import java.util.Locale;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
+
+import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
+import java.util.List;
+import java.util.Locale;
+
 import br.edu.ifsp.financasdroid.R;
+import br.edu.ifsp.financasdroid.controller.add.AddTransaction;
+import br.edu.ifsp.financasdroid.controller.fragment.CreditFragment;
+import br.edu.ifsp.financasdroid.controller.fragment.DebitFragment;
+import br.edu.ifsp.financasdroid.model.TransactionType;
 import br.edu.ifsp.financasdroid.model.entity.Transaction;
 
 public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.TransactionViewHolder>{
@@ -20,11 +28,14 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
     private List<Transaction> transactions;
     private Fragment parentFragment;
     private LayoutInflater inflater;
+    private  TransactionType type;
 
-    public TransactionAdapter(Fragment parentFragment, List<Transaction> transactions){
+    public TransactionAdapter(Fragment parentFragment, List<Transaction> transactions, TransactionType type){
         this.transactions = transactions;
-        this.parentFragment = parentFragment;
         this.inflater = LayoutInflater.from(parentFragment.getContext());
+        this.parentFragment = parentFragment;
+        this.type = type;
+
     }
 
     @NonNull
@@ -41,11 +52,33 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
         TextView date = holder.itemView.findViewById(R.id.date);
         TextView description = holder.itemView.findViewById(R.id.description);
         NumberFormat format = NumberFormat.getCurrencyInstance(new Locale("PT","BR"));
+        Button remove = holder.itemView.findViewById(R.id.remove);
 
         category.setText(transactions.get(position).getCategory().getDescription());
         value.setText(format.format(transactions.get(position).getValue()));
-        date.setText(transactions.get(position).getDate());
+
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+
+        date.setText(formato.format(transactions.get(position).getDate()));
         description.setText(transactions.get(position).getDescription());
+
+        remove.setOnClickListener(view -> {
+            if (type.equals(TransactionType.CREDIT)) {
+                ((CreditFragment) parentFragment).removeTransaction(position);
+            } else if (type.equals(TransactionType.DEBIT)) {
+                ((DebitFragment) parentFragment).removeTransaction(position);
+            }
+        });
+
+
+        holder.itemView.setOnLongClickListener(view -> {
+            Transaction transaction = transactions.get(position);
+            Intent intent = new Intent(parentFragment.getContext(), AddTransaction.class);
+            intent.putExtra("type", type.getType());
+            intent.putExtra("transaction_id", transaction.getId());
+            parentFragment.startActivityForResult(intent, 1);
+            return true;
+        });
     }
 
     @Override

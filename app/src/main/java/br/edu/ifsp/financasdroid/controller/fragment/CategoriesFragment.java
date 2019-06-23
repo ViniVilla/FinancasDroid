@@ -39,7 +39,6 @@ public class CategoriesFragment extends Fragment {
         fab.setOnClickListener(this::fabClick);
 
         categoryService = new CategoryService(view.getContext());
-
         recyclerView = view.findViewById(R.id.recyclerview);
 
         updateRecyclerView();

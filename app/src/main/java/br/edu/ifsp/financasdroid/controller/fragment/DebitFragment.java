@@ -39,8 +39,9 @@ public class DebitFragment extends Fragment {
         fab.setOnClickListener(this::fabClick);
 
         transactionService = new TransactionService(getContext());
+        recyclerView = view.findViewById(R.id.recyclerview);
 
-        updateRecyclerView(view);
+        updateRecyclerView();
         return view;
     }
 
@@ -50,17 +51,21 @@ public class DebitFragment extends Fragment {
         startActivityForResult(intent, 1);
     }
 
-    private void updateRecyclerView(View view) {
+    public void removeTransaction(int position) {
+        transactionService.delete(transactions.get(position));
+        updateRecyclerView();
+    }
+
+    private void updateRecyclerView() {
         transactions = transactionService.findByType(TransactionType.DEBIT.getType());
-        recyclerView = view.findViewById(R.id.recyclerview);
-        adapter = new TransactionAdapter(this, transactions);
+        adapter = new TransactionAdapter(this, transactions, TransactionType.DEBIT);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        updateRecyclerView(recyclerView);
+        updateRecyclerView();
     }
 
 }

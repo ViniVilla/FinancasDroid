@@ -28,7 +28,9 @@ import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 public class AddTransaction extends AppCompatActivity implements DatePickerDialog.OnDateSetListener{
@@ -39,6 +41,7 @@ public class AddTransaction extends AppCompatActivity implements DatePickerDialo
     private SnackbarService snackbarService;
     private DatePickerFragment datePicker = new DatePickerFragment();
     private String type;
+    private Transaction transaction = new Transaction();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +64,18 @@ public class AddTransaction extends AppCompatActivity implements DatePickerDialo
         viewHolder.imageView.setOnClickListener(this::showDateDialog);
         viewHolder.add.setOnClickListener(this::addTransaction);
         populateSpinner();
+
+        Long id = getIntent().getLongExtra("transaction_id", 0);
+        if (id != 0) {
+            transaction = transactionService.findById(id);
+            viewHolder.description.setText(transaction.getDescription());
+            viewHolder.value.setText(transaction.getValue().toString());
+
+            SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+
+            viewHolder.date.setText(format.format(transaction.getDate()));
+
+        }
     }
 
     public void showDateDialog(View view){
@@ -88,8 +103,13 @@ public class AddTransaction extends AppCompatActivity implements DatePickerDialo
 
     private void addTransaction(final View view) {
         try {
-            Transaction transaction = readInputData();
-            transactionService.save(transaction);
+            transaction = readInputData();
+            if (transaction.getId() != null) {
+                transactionService.update(transaction);
+                transaction = transactionService.findById(transaction.getId());
+            } else {
+                transactionService.save(transaction);
+            }
             setResult(RESULT_OK);
             finish();
         } catch (ValidationException e) {
@@ -101,7 +121,6 @@ public class AddTransaction extends AppCompatActivity implements DatePickerDialo
     }
 
     private Transaction readInputData() {
-        Transaction transaction = new Transaction();
         final Category category = (Category) viewHolder.spinner.getSelectedItem();
         final String date = viewHolder.date.getText().toString();
         final String stringValue = viewHolder.value.getText().toString();
@@ -116,7 +135,11 @@ public class AddTransaction extends AppCompatActivity implements DatePickerDialo
 
         final Double value = Double.parseDouble(stringValue);
         transaction.setCategory(category);
-        transaction.setDate(date);
+
+        String[] d = date.split("/");
+
+        transaction.setDate(new Date(Integer.parseInt(d[2]) - 1900, Integer.parseInt(d[1]) - 1, Integer.parseInt(d[0])));
+
         transaction.setValue(value);
         transaction.setCategoryId(category.getId());
         transaction.setDescription(description);
